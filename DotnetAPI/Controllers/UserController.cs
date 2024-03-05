@@ -8,7 +8,7 @@ public class UserController : ControllerBase
 {
     public UserController(IConfiguration config)
     {
-        config.GetConnectionString("DefaultConnection");
+       
     }
 
     [HttpGet("GetUsers/{testValue}")]
