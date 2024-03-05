@@ -29,9 +29,11 @@ public class UserController : ControllerBase
 
     }
     
-    // [HttpGet("GetSingleUser/{userId}")]
-    // public User GetSingleUser(int userId)
-    // {
-    //     
-    // }
+    [HttpGet("GetSingleUser/{userId}")]
+    public User GetSingleUser(int userId)
+    {
+        string sql = @"SELECT [UserId],[FirstName],[LastName],[Email],[Gender],[Active] FROM TutorialAppSchema.Users WHERE UserId = " + userId.ToString();
+        User user = _dapper.LoadDataSingle<User>(sql);
+        return user;
+    }
 }
