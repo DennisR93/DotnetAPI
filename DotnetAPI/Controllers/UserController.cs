@@ -1,4 +1,5 @@
 using DotnetAPI.Data;
+using DotnetAPI.DTOs;
 using DotnetAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,7 +52,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost("AddUser")]
-    public IActionResult AddUser(User user)
+    public IActionResult AddUser(UserToAddDto userToAdd)
     {
 
         string sql = @"INSERT INTO TutorialAppSchema.Users(
@@ -59,7 +60,7 @@ public class UserController : ControllerBase
 [LastName],
 [Email],
 [Gender],
-[Active]) VALUES (" + "'" + user.FirstName + "', '" + user.LastName + "', '" + user.Email + "', '" + user.Gender + "', '" + user.Active + "')";
+[Active]) VALUES (" + "'" + userToAdd.FirstName + "', '" + userToAdd.LastName + "', '" + userToAdd.Email + "', '" + userToAdd.Gender + "', '" + userToAdd.Active + "')";
         Console.WriteLine(sql);
         if (_dapper.ExecuteSql(sql))
         {
