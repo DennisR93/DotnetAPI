@@ -18,7 +18,7 @@ public class UserJobInfoEfController : ControllerBase
         _entityFramework = new DataContextEF(config);
         _mapper = new Mapper(new MapperConfiguration(cfg =>
         {
-            cfg.CreateMap<UserJobInfoToAddDto, UserJobInfo>();
+            cfg.CreateMap<UserJobInfo, UserJobInfo>();
         }));
     }
 
@@ -44,12 +44,10 @@ public class UserJobInfoEfController : ControllerBase
     [HttpPut("EditUserJobInfo")]
     public IActionResult EditUserJobInfo(UserJobInfo userJobInfo)
     {
-        UserJobInfo? userDb = _entityFramework.UserJobInfo.Where(u => u.UserId == userJobInfo.UserId).FirstOrDefault();
-        if (userDb != null)
+        UserJobInfo? userToUpdate = _entityFramework.UserJobInfo.Where(u => u.UserId == userJobInfo.UserId).FirstOrDefault();
+        if (userToUpdate != null)
         {
-            userDb.JobTitle = userJobInfo.JobTitle;
-            userDb.Department = userJobInfo.Department;
-
+            _mapper.Map(userToUpdate, userJobInfo);
             if (_entityFramework.SaveChanges() > 0)
             {
                 return Ok();
@@ -60,14 +58,9 @@ public class UserJobInfoEfController : ControllerBase
     }
 
     [HttpPost("AddUserJobInfo")]
-    public IActionResult AddUserJobInfo(UserJobInfoToAddDto userJobInfoToAdd)
+    public IActionResult AddUserJobInfo(UserJobInfo userJobInfoToAdd)
     {
-        UserJobInfo userDb = _mapper.Map<UserJobInfo>(userJobInfoToAdd);
-
-        userDb.JobTitle = userJobInfoToAdd.JobTitle;
-        userDb.Department = userJobInfoToAdd.Department;
-
-        _entityFramework.Add(userDb);
+        _entityFramework.Add(userJobInfoToAdd);
         if (_entityFramework.SaveChanges() > 0)
         {
             return Ok();
@@ -89,7 +82,6 @@ public class UserJobInfoEfController : ControllerBase
             }
             throw new Exception("Failed to Delete User Job Info");
         }
-
         throw new Exception("Failed to Get User Job Info");
     }
 }
