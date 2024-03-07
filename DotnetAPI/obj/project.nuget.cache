@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hD2t1FbrFKpKlN015/9i7H3qzT5UaGnFUNgHzm89KE7ZW56yzmh9zU8t9ynzc9xr7FqnXsMfmFCZ0v+ZyV1qbQ==",
+  "dgSpecHash": "c3QyWHoT4KVeHB4SVnaO534So1toyr2NbrFjmFGm+fBSG5O8xrhZ/vQk8NPStuRBMaat17AEfZcGAoFR4OApUQ==",
   "success": true,
   "projectFilePath": "/Users/dennisrabinovitch/Projects/C#/dotnet-course-code/DotnetAPI/DotnetAPI/DotnetAPI/DotnetAPI.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.15/microsoft.entityframeworkcore.abstractions.7.0.15.nupkg.sha512",
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.15/microsoft.entityframeworkcore.analyzers.7.0.15.nupkg.sha512",
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.15/microsoft.entityframeworkcore.relational.7.0.15.nupkg.sha512",
+    "/Users/dennisrabinovitch/.nuget/packages/microsoft.entityframeworkcore.sqlserver/7.0.15/microsoft.entityframeworkcore.sqlserver.7.0.15.nupkg.sha512",
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/Users/dennisrabinovitch/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
