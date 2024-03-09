@@ -56,7 +56,7 @@ public class UserEFController : ControllerBase
             userDb.Gender = user.Gender;
             userDb.Email = user.Email;
 
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -78,7 +78,7 @@ public class UserEFController : ControllerBase
             userDb.Email = userToAdd.Email;
             
             _entityFramework.Add(userDb);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -93,7 +93,7 @@ public class UserEFController : ControllerBase
         if (userDb != null)
         {
             _entityFramework.Users.Remove(userDb);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
