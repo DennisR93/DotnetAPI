@@ -70,7 +70,7 @@ public class UserSalaryEfController : ControllerBase
         // userDb.Salary = userSalaryToAdd.Salary;
         // userDb.AvgSalary = userSalaryToAdd.AvgSalary;
 
-        _entityFramework.Add(userSalaryToAdd);
+        _userRepository.AddEntity<UserSalary>(userSalaryToAdd);
         if (_userRepository.SaveChanges())
         {
             return Ok();
