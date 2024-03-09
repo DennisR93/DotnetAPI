@@ -77,7 +77,7 @@ public class UserEFController : ControllerBase
             userDb.Gender = userToAdd.Gender;
             userDb.Email = userToAdd.Email;
             
-            _entityFramework.Add(userDb);
+            _userRepository.AddEntity<User>(userDb);
             if (_userRepository.SaveChanges())
             {
                 return Ok();
