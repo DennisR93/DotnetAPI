@@ -92,7 +92,7 @@ public class UserEFController : ControllerBase
         User? userDb = _entityFramework.Users.Where(u => u.UserId == userId).FirstOrDefault<User>();
         if (userDb != null)
         {
-            _entityFramework.Users.Remove(userDb);
+            _userRepository.RemoveEntity<User>(userDb);
             if (_userRepository.SaveChanges())
             {
                 return Ok();
