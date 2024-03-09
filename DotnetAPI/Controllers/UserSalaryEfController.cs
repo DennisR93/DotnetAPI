@@ -85,7 +85,7 @@ public class UserSalaryEfController : ControllerBase
         UserSalary? userToDelete = _entityFramework.UserSalary.Where(u => u.UserId == userId).FirstOrDefault<UserSalary>();
         if (userToDelete != null)
         {
-            _entityFramework.UserSalary.Remove(userToDelete);
+            _userRepository.RemoveEntity<UserSalary>(userToDelete);
             if (_userRepository.SaveChanges())
             {
                 return Ok();
