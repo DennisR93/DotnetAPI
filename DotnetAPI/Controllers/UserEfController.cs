@@ -1,6 +1,7 @@
 using AutoMapper;
 using DotnetAPI.Data;
 using DotnetAPI.DTOs;
+using DotnetAPI.Interfaces;
 using DotnetAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,12 @@ namespace DotnetAPI.Controllers;
 [Route("[controller]")]
 public class UserEFController : ControllerBase
 {
+    private readonly IUserRepository _userRepository;
     private DataContextEF _entityFramework;
     private IMapper _mapper;
-    public UserEFController(IConfiguration config)
+    public UserEFController(IConfiguration config, IUserRepository userRepository)
     {
+        _userRepository = userRepository;
         _entityFramework = new DataContextEF(config);
         _mapper = new Mapper(new MapperConfiguration(cfg =>
         {
