@@ -1,6 +1,7 @@
 using AutoMapper;
 using DotnetAPI.Data;
 using DotnetAPI.DTOs;
+using DotnetAPI.Interfaces;
 using DotnetAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +11,13 @@ namespace DotnetAPI.Controllers;
 [Route(("[controller]"))]
 public class UserJobInfoEfController : ControllerBase
 {
+    private readonly IUserRepository _userRepository;
     private DataContextEF _entityFramework;
     private IMapper _mapper;
 
-    public UserJobInfoEfController(IConfiguration config)
+    public UserJobInfoEfController(IConfiguration config, IUserRepository userRepository)
     {
+        _userRepository = userRepository;
         _entityFramework = new DataContextEF(config);
         _mapper = new Mapper(new MapperConfiguration(cfg =>
         {
@@ -48,7 +51,7 @@ public class UserJobInfoEfController : ControllerBase
         if (userToUpdate != null)
         {
             _mapper.Map(userToUpdate, userJobInfo);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -61,7 +64,7 @@ public class UserJobInfoEfController : ControllerBase
     public IActionResult AddUserJobInfo(UserJobInfo userJobInfoToAdd)
     {
         _entityFramework.Add(userJobInfoToAdd);
-        if (_entityFramework.SaveChanges() > 0)
+        if (_userRepository.SaveChanges())
         {
             return Ok();
         }
@@ -76,7 +79,7 @@ public class UserJobInfoEfController : ControllerBase
         if (userDb != null)
         {
             _entityFramework.UserJobInfo.Remove(userDb);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
