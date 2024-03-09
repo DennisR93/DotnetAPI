@@ -78,7 +78,7 @@ public class UserJobInfoEfController : ControllerBase
         UserJobInfo? userDb = _entityFramework.UserJobInfo.Where(u => u.UserId == userId).FirstOrDefault<UserJobInfo>();
         if (userDb != null)
         {
-            _entityFramework.UserJobInfo.Remove(userDb);
+            _userRepository.RemoveEntity<UserJobInfo>(userDb);
             if (_userRepository.SaveChanges())
             {
                 return Ok();
