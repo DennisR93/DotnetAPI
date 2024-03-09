@@ -63,7 +63,7 @@ public class UserJobInfoEfController : ControllerBase
     [HttpPost("AddUserJobInfo")]
     public IActionResult AddUserJobInfo(UserJobInfo userJobInfoToAdd)
     {
-        _entityFramework.Add(userJobInfoToAdd);
+        _userRepository.AddEntity<UserJobInfo>(userJobInfoToAdd);
         if (_userRepository.SaveChanges())
         {
             return Ok();
