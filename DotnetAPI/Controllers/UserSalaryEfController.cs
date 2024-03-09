@@ -1,6 +1,7 @@
 using AutoMapper;
 using DotnetAPI.Data;
 using DotnetAPI.DTOs;
+using DotnetAPI.Interfaces;
 using DotnetAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,11 +11,13 @@ namespace DotnetAPI.Controllers;
 [Route(("[controller]"))]
 public class UserSalaryEfController : ControllerBase
 {
+    private readonly IUserRepository _userRepository;
     private DataContextEF _entityFramework;
     private IMapper _mapper;
 
-    public UserSalaryEfController(IConfiguration config)
+    public UserSalaryEfController(IConfiguration config, IUserRepository userRepository)
     {
+        _userRepository = userRepository;
         _entityFramework = new DataContextEF(config);
         _mapper = new Mapper(new MapperConfiguration(cfg =>
         {
@@ -48,7 +51,7 @@ public class UserSalaryEfController : ControllerBase
         if (userSalaryToUpdate != null)
         {
             _mapper.Map(userSalary, userSalaryToUpdate);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
@@ -68,7 +71,7 @@ public class UserSalaryEfController : ControllerBase
         // userDb.AvgSalary = userSalaryToAdd.AvgSalary;
 
         _entityFramework.Add(userSalaryToAdd);
-        if (_entityFramework.SaveChanges() > 0)
+        if (_userRepository.SaveChanges())
         {
             return Ok();
         }
@@ -83,7 +86,7 @@ public class UserSalaryEfController : ControllerBase
         if (userToDelete != null)
         {
             _entityFramework.UserSalary.Remove(userToDelete);
-            if (_entityFramework.SaveChanges() > 0)
+            if (_userRepository.SaveChanges())
             {
                 return Ok();
             }
