@@ -12,42 +12,34 @@ namespace DotnetAPI.Controllers;
 public class UserSalaryEfController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
-    private DataContextEF _entityFramework;
     private IMapper _mapper;
 
     public UserSalaryEfController(IConfiguration config, IUserRepository userRepository)
     {
         _userRepository = userRepository;
-        _entityFramework = new DataContextEF(config);
         _mapper = new Mapper(new MapperConfiguration(cfg =>
         {
             cfg.CreateMap<UserSalary, UserSalary>();
         }));
     }
 
-    [HttpGet("GetUsersSalary")]
-    public IEnumerable<UserSalary> GetUsersSalary()
-    {
-        IEnumerable<UserSalary> userSalary = _entityFramework.UserSalary.ToList<UserSalary>();
-        return userSalary;
-    }
+    // [HttpGet("GetUsersSalary")]
+    // public IEnumerable<UserSalary> GetUsersSalary()
+    // {
+    //     IEnumerable<UserSalary> userSalary = _entityFramework.UserSalary.ToList<UserSalary>();
+    //     return userSalary;
+    // }
 
     [HttpGet("GetSingleUserSalary/{userId}")]
     public UserSalary GetSingleUserSalary(int userId)
     {
-        UserSalary? userSalary = _entityFramework.UserSalary.Where(u => u.UserId == userId).FirstOrDefault();
-        if (userSalary != null)
-        {
-            return userSalary;
-        }
-
-        throw new Exception("Failed to Get User Salary");
+        return _userRepository.GetSingleUserSalary(userId);
     }
 
     [HttpPut("EditUserSalary")]
     public IActionResult EditUserSalary(UserSalary userSalary)
     {
-        UserSalary? userSalaryToUpdate = _entityFramework.UserSalary.Where(u => u.UserId == userSalary.UserId).FirstOrDefault();
+        UserSalary? userSalaryToUpdate = _userRepository.GetSingleUserSalary(userSalary.UserId);
         if (userSalaryToUpdate != null)
         {
             _mapper.Map(userSalary, userSalaryToUpdate);
@@ -82,7 +74,7 @@ public class UserSalaryEfController : ControllerBase
     [HttpDelete("DeleteUserJSalary/{userId}")]
     public IActionResult DeleteUserSalary(int userId)
     {
-        UserSalary? userToDelete = _entityFramework.UserSalary.Where(u => u.UserId == userId).FirstOrDefault<UserSalary>();
+        UserSalary? userToDelete = _userRepository.GetSingleUserSalary(userId);
         if (userToDelete != null)
         {
             _userRepository.RemoveEntity<UserSalary>(userToDelete);
