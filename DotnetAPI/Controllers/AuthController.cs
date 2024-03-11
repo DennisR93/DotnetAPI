@@ -69,7 +69,7 @@ public class AuthController : ControllerBase
     public IActionResult Login(UserForLoginDto userForLogin)
     {
         string sqlForHashAndSalt =
-            @"SELECT [PasswordHash], [PasswordSalt] FROM TutorialAppSchema.Auth WHERE Email = ''" + userForLogin.Email + "'";
+            @"SELECT [PasswordHash], [PasswordSalt] FROM TutorialAppSchema.Auth WHERE Email = '" + userForLogin.Email + "'";
 
         UserForLoginConfirmationDto userForLoginConfirmation =
             _dapper.LoadDataSingle<UserForLoginConfirmationDto>(sqlForHashAndSalt);
