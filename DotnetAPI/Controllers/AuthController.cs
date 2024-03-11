@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
     {
         if (userForRegistration.Password == userForRegistration.PasswordConfirm)
         {
-            string sqlCheckUserExists = "SELECT * FROM TutoriaAppSchema.Auth WHERE Email = '" + userForRegistration.Email + "'";
+            string sqlCheckUserExists = "SELECT * FROM TutorialAppSchema.Auth WHERE Email = '" + userForRegistration.Email + "'";
             IEnumerable<string> existingUsers = _dapper.LoadData<string>(sqlCheckUserExists);
             if (existingUsers.Count() == 0)
             {
@@ -35,7 +35,7 @@ public class AuthController : ControllerBase
                     rng.GetNonZeroBytes(passwordSalt);
                 }
 
-                byte[] passwordHash = GetPasswordHas(userForRegistration.Password, passwordSalt);
+                byte[] passwordHash = GetPasswordHash(userForRegistration.Password, passwordSalt);
 
                 string sqlAddAuth =
                     @"INSERT INTO TutorialAppSchema.Auth ([Email], [PasswordHash], [PasswordSalt]) VALUES ('" +
@@ -68,10 +68,26 @@ public class AuthController : ControllerBase
     [HttpPost("Login")]
     public IActionResult Login(UserForLoginDto userForLogin)
     {
+        string sqlForHashAndSalt =
+            @"SELECT [PasswordHash], [PasswordSalt] FROM TutorialAppSchema.Auth WHERE Email = ''" + userForLogin.Email + "'";
+
+        UserForLoginConfirmationDto userForLoginConfirmation =
+            _dapper.LoadDataSingle<UserForLoginConfirmationDto>(sqlForHashAndSalt);
+
+        byte[] passwordHash = GetPasswordHash(userForLogin.Password, userForLoginConfirmation.PasswordSalt);
+
+        for (int index = 0; index < passwordHash.Length; index++)
+        {
+            if (passwordHash[index] != userForLoginConfirmation.PasswordHash[index])
+            {
+                return StatusCode(401,"Incorrect Password!");
+            }
+        }
+        
         return Ok();
     }
 
-    private byte[] GetPasswordHas(string password, byte[] passwordSalt)
+    private byte[] GetPasswordHash(string password, byte[] passwordSalt)
     {
         string passwordSaltPlusString = _configuration.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
 
