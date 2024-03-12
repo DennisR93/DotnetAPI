@@ -75,6 +75,25 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.15": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0"
+        },
+        "compile": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.OpenApi/7.0.15": {
         "type": "package",
         "dependencies": {
@@ -1172,6 +1191,21 @@
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml",
         "readme.md"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.15": {
+      "sha512": "ALtrIA59lv+vMVM3Fsr+nGTSHP8/FOi9EoQtJPZs44MI7kEa6JjJPmyRly0TJ0/xJwDpUpAFgF2mlPgt+IdXMg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/7.0.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.7.0.15.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.AspNetCore.OpenApi/7.0.15": {
@@ -3142,6 +3176,7 @@
     "net7.0": [
       "AutoMapper >= 13.0.1",
       "Dapper >= 2.1.28",
+      "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.15",
       "Microsoft.AspNetCore.OpenApi >= 7.0.15",
       "Microsoft.Data.SqlClient >= 5.2.0",
       "Microsoft.EntityFrameworkCore >= 7.0.15",
@@ -3195,6 +3230,10 @@
           "Dapper": {
             "target": "Package",
             "version": "[2.1.28, )"
+          },
+          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[7.0.15, )"
           },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",
