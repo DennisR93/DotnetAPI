@@ -14,6 +14,8 @@ using Microsoft.IdentityModel.Tokens;
 namespace DotnetAPI.Controllers;
 
 [Authorize]
+[ApiController]
+[Route("[controller]")]
 public class AuthController : ControllerBase
 {
     private readonly DataContextDapper _dapper;
