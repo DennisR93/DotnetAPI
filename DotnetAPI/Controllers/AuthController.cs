@@ -109,6 +109,17 @@ public class AuthController : ControllerBase
         });
     }
 
+    
+   [HttpGet("RefreshToken")]
+    public string RefreshToken()
+    {
+        string userIdSql = @"SELECT UserId FROM TutorialAPpSchema.Users WHERE UserId = '" +
+                           User.FindFirst("userId")?.Value + "'";
+        int userId = _dapper.LoadDataSingle<int>(userIdSql);
+
+        return CreateToken(userId);
+    }
+
     private byte[] GetPasswordHash(string password, byte[] passwordSalt)
     {
         string passwordSaltPlusString = _configuration.GetSection("AppSettings:PasswordKey").Value + Convert.ToBase64String(passwordSalt);
