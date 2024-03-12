@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using DotnetAPI.Data;
 using DotnetAPI.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -12,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace DotnetAPI.Controllers;
 
+[Authorize]
 public class AuthController : ControllerBase
 {
     private readonly DataContextDapper _dapper;
@@ -23,6 +25,7 @@ public class AuthController : ControllerBase
         _configuration = config;
     }
 
+    [AllowAnonymous]
     [HttpPost("Register")]
     public IActionResult Register(UserForRegistrationDto userForRegistration)
     {
@@ -76,6 +79,7 @@ public class AuthController : ControllerBase
         throw new Exception("Passwords do not match!");
     }
 
+    [AllowAnonymous]
     [HttpPost("Login")]
     public IActionResult Login(UserForLoginDto userForLogin)
     {
