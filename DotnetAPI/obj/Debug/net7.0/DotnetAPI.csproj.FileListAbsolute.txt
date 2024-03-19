@@ -81,3 +81,4 @@
 /Users/dennisrabinovitch/Projects/C#/dotnet-course-code/DotnetAPI/DotnetAPI/DotnetAPI/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/dennisrabinovitch/Projects/C#/dotnet-course-code/DotnetAPI/DotnetAPI/DotnetAPI/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Relational.dll
 /Users/dennisrabinovitch/Projects/C#/dotnet-course-code/DotnetAPI/DotnetAPI/DotnetAPI/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.SqlServer.dll
+/Users/dennisrabinovitch/Projects/C#/dotnet-course-code/DotnetAPI/DotnetAPI/DotnetAPI/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
