@@ -27,10 +27,10 @@ public class PostController : ControllerBase
     }
 
     [HttpGet("PostsSingle/{postId}")]
-    public IEnumerable<Post> GetSinglePost(int postId)
+    public Post GetSinglePost(int postId)
     {
         string sql = @"SELECT [PostId],[UserId],[PostTitle],[PostContent],[PostCreated],[PostUpdated] FROM TutorialAppSchema.Posts WHERE PostId =" + postId.ToString();
-        return _dapper.LoadData<Post>(sql);
+        return _dapper.LoadDataSingle<Post>(sql);
     }
     
     [HttpGet("PostsByUser/{userId}")]
@@ -81,7 +81,7 @@ public class PostController : ControllerBase
     [HttpDelete("Post/{postId}")]
     public IActionResult DeletePost(int postId)
     {
-        string sql = "DELETE FROM TutorialAppSchema.Posts WHERE PostId = " + postId.ToString();
+        string sql = "DELETE FROM TutorialAppSchema.Posts WHERE PostId = " + postId.ToString() + "AND UserId =" + this.User.FindFirst("userId")?.Value;
 
         if (_dapper.ExecuteSql(sql))
         {
