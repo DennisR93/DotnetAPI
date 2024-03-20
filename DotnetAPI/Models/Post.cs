@@ -1,6 +1,6 @@
 namespace DotnetAPI.Models;
 
-public class Posts
+public class Post
 {
     public int PostId {get; set;}
     public int UserId {get; set;}
