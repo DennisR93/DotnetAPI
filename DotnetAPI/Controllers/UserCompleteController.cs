@@ -52,7 +52,6 @@ public class UserCompleteController : ControllerBase
         // @Active BIT = 1,
         // @UserId INT = NULL
         string sql = @"EXEC TutorialAppSchema.spUser_Upsert @FirstName = '" + user.FirstName + "', @LastName = '" + user.LastName + "', @Email = '" + user.Email + "', @Gender = '" + user.Gender + "', @Active = '" + user.Active + "', @JobTitle = '" + user.JobTitle + "', @Department = '" + user.Department + "', @Salary = '" + user.Salary + "', @UserId = " + user.UserId;
-        Console.WriteLine(sql);
         if (_dapper.ExecuteSql(sql))
         {
             return Ok();    
