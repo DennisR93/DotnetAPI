@@ -41,16 +41,6 @@ public class UserCompleteController : ControllerBase
     [HttpPut("UpsertUser")]
     public IActionResult UpsertUser(UserComplete user)
     {
-        // TutorialAppSchema.spUser_Upsert
-        // @FirstName NVARCHAR(50),
-        // @LastName NVARCHAR(50),
-        // @Email NVARCHAR(50),
-        // @Gender NVARCHAR(50),
-        // @JobTitle NVARCHAR(50),
-        // @Department NVARCHAR(50),
-        // @Salary DECIMAL(18, 4),
-        // @Active BIT = 1,
-        // @UserId INT = NULL
         string sql = @"EXEC TutorialAppSchema.spUser_Upsert @FirstName = '" + user.FirstName + "', @LastName = '" + user.LastName + "', @Email = '" + user.Email + "', @Gender = '" + user.Gender + "', @Active = '" + user.Active + "', @JobTitle = '" + user.JobTitle + "', @Department = '" + user.Department + "', @Salary = '" + user.Salary + "', @UserId = " + user.UserId;
         if (_dapper.ExecuteSql(sql))
         {
