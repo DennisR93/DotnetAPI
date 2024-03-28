@@ -7,6 +7,7 @@ using AutoMapper;
 using Dapper;
 using DotnetAPI.Data;
 using DotnetAPI.DTOs;
+using DotnetAPI.Helpers;
 using DotnetAPI.Interfaces;
 using DotnetAPI.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +28,7 @@ public class AuthController : ControllerBase
     private readonly ReusableSql _reusableSql;
     private readonly IMapper _mapper;
     
-    public AuthController(IConfiguration config, AuthHelper authHelper)
+    public AuthController(IConfiguration config)
     {
         _dapper = new DataContextDapper(config);
         _authHelper = new AuthHelper(config);
